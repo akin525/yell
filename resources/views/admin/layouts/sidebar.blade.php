@@ -32,7 +32,11 @@
     <!-- Main css -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
+    <link rel="stylesheet" href="{{asset('Buy Data _ MobileNig_files/w3(1).css')}}">
 
+    <link rel="stylesheet" href="{{asset('Buy Data _ MobileNig_files/w3(2).css')}}">
+    <link rel="stylesheet" href="{{asset('Buy Data _ MobileNig_files/font-awesome.min.css')}}">
+    <link href="{{asset('Buy Data _ MobileNig_files/icon')}}" rel="stylesheet">
     <!-- *************
         ************ Vendor Css Files *************
     ************ -->
@@ -209,7 +213,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             <div class="dropdown-divider"></div>
-{{--                            <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>--}}
+                            {{--                            <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>--}}
                         </div>
                     </li>
                     <!-- ============================================================== -->
@@ -231,7 +235,6 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin/dashboard')}}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Switch to Admin</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('profile.show') }}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">My Account</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('fund')}}" aria-expanded="false"><i class="mdi mdi-wallet-membership"></i><span class="hide-menu">Fund Wallet</span></a></li>
@@ -265,7 +268,7 @@
 
         @include('sweetalert::alert')
 
-{{--            @livewire('navigation-menu')--}}
+        {{--            @livewire('navigation-menu')--}}
 
 
 
@@ -274,7 +277,7 @@
 
 
 
-            <!-- ============================================================== -->
+        <!-- ============================================================== -->
             <!-- End Wrapper -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->

@@ -35,12 +35,8 @@ public function dashboard(Request $request)
         foreach ($profit as $pro) {
             $totalprofit += $pro->amount;
         }
-        $wallet = wallet::get();
-        $totalwallet=0;
-        foreach ($wallet as $wall) {
-            $totalwallet += (int)$wall->balance;
+        $totalwallet=User::sum('wallet');
 
-        }
         $deposite = deposit::get();
         $totaldeposite = 0;
         foreach ($deposite as $depo) {
@@ -66,42 +62,40 @@ public function dashboard(Request $request)
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $resellerURL . 'me',
+            CURLOPT_URL => 'https://renomobilemoney.com/api/dashboard',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('service' => 'balance'),
+            CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: mcd_key_tGSkWHl5fJZsJev5FRyB5hT1HutlCa'
+                'apikey: RENO-62c60552bbe6a5.09230661'
             ),
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
+//        echo $response;
+
 //                                                        return $response;
         $data = json_decode($response, true);
-        $success = $data["success"];
-        $tran = $data["data"]["wallet"];
-        $pa = $data["data"]["commission"];
-
+//        $success = $data["success"];
+        $tran = $data["wallet"][0]['balance'];
+//        $pa = $data["data"]["commission"];
         $today = Carbon::now()->format('Y-m-d');
 
 
         $data['bill'] = bo::where([['result', '=', '1'], ['date', 'LIKE', $today . '%']])->count();
         $data['deposit'] = deposit::where([['status', '=', '1'], ['date', 'LIKE', $today . '%']])->count();
         $data['user'] = User::where([['created_at', 'LIKE', $today . '%']])->count();
-        $data['nou'] = wallet::where([['updated_at', 'LIKE', $today . '%']])->count();
+        $data['nou'] = User::where([['updated_at', 'LIKE', $today . '%']])->count();
         $data['sum_deposits'] = deposit::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
         $data['sum_bill'] = bo::where([['date', 'LIKE', '%' . $today . '%']])->sum('amount');
 
-        return view('admin/dashboard', compact('user', 'wallet', 'data', 'lock', 'totalcharge',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
+        return view('admin/dashboard', compact('user',  'data', 'lock', 'totalcharge',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');

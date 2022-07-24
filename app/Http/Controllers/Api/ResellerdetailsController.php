@@ -21,7 +21,7 @@ class ResellerdetailsController
         $user = User::where('apikey',$apikey)->first();
         if ($user) {
             $me = Messages::where('status', 1)->first();
-            $wallet = wallet::where('username', $user->username)->get();
+            $wallet = wallet::where('username', $user->username)->first();
             $deposite = deposit::where('username', $user->username)->get();
             $totaldeposite = 0;
             foreach ($deposite as $depo){
