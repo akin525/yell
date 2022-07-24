@@ -83,7 +83,7 @@ class AirtimeController
                     CURLOPT_POSTFIELDS => array( 'name' => $request->name, 'number' => $request->number, 'amount' => $request->amount, 'refid' => $request->refid),
 
                     CURLOPT_HTTPHEADER => array(
-                        'apikey: RENO-62c60552bbe6a5.09230661'
+                        'apikey: RENO-62ddc85d549f76.59606188'
                     )));
 
                 $response = curl_exec($curl);
@@ -192,7 +192,7 @@ Alert::error('Insufficient Balance', $mg);
   "amount" : "'.$request->amount.'"
 }',
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer sk_live_9a55cd84-8ad7-46d9-9136-c5962858f753',
+//                    'Authorization: Bearer sk_live_9a55cd84-8ad7-46d9-9136-c5962858f753',
                     'Accept: application/json',
                     'Content-Type: application/json'
                 ),
